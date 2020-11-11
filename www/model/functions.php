@@ -10,6 +10,11 @@ function redirect_to($url){
   exit;
 }
 
+function h($s){
+	return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+}
+
+
 function get_get($name){
   if(isset($_GET[$name]) === true){
     return $_GET[$name];
@@ -99,7 +104,7 @@ function delete_image($filename){
     return true;
   }
   return false;
-  
+
 }
 
 
@@ -134,4 +139,3 @@ function is_valid_upload_image($image){
   }
   return true;
 }
-
