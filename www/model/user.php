@@ -5,7 +5,7 @@ require_once MODEL_PATH . 'db.php';
 function get_user($db, $user_id){
   $sql = "
     SELECT
-      user_id, 
+      user_id,
       name,
       password,
       type
@@ -22,7 +22,7 @@ function get_user($db, $user_id){
 function get_user_by_name($db, $name){
   $sql = "
     SELECT
-      user_id, 
+      user_id,
       name,
       password,
       type
@@ -45,7 +45,9 @@ function login_as($db, $name, $password){
   return $user;
 }
 
+ //$_SESSION['user_id']でDBusersテーブルから該当するuser_idを抽出し、情報を返す
 function get_login_user($db){
+  //$_SESSION['user_id']を変数として出力する
   $login_user_id = get_session('user_id');
 
   return get_user($db, $login_user_id);
@@ -55,10 +57,11 @@ function regist_user($db, $name, $password, $password_confirmation) {
   if( is_valid_user($name, $password, $password_confirmation) === false){
     return false;
   }
-  
+
   return insert_user($db, $name, $password);
 }
 
+//DBテーブルusers、typeカラムを抽出して返す
 function is_admin($user){
   return $user['type'] === USER_TYPE_ADMIN;
 }
@@ -109,4 +112,3 @@ function insert_user($db, $name, $password){
 
   return execute_query($db, $sql);
 }
-

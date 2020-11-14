@@ -26,6 +26,7 @@ $price = get_post('price');
 $status = get_post('status');
 $stock = get_post('stock');
 
+//view_admin.phpから飛んできたimageをグローバル変数FILESに配列として格納し、変数で出力する
 $image = get_file('image');
 
 if(regist_item($db, $name, $price, $stock, $status, $image)){
