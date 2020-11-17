@@ -5,7 +5,7 @@ require_once '../conf/const.php';
 require_once MODEL_PATH . 'functions.php';
 ///var/www/html/../model/user.phpというドキュメントルートを通りuserデータに関する関数ファイルを読み込み
 require_once MODEL_PATH . 'user.php';
-///var/www/html/../model/user.phpというドキュメントルートを通りitemデータに関する関数ファイルを読み込み
+///var/www/html/../model/item.phpというドキュメントルートを通りitemデータに関する関数ファイルを読み込み
 require_once MODEL_PATH . 'item.php';
 
 //セッションの開始、作成
@@ -33,13 +33,16 @@ if(is_admin($user) === false){
 $item_id = get_post('item_id');
 
 
-//DBitemsテーブル、
+//DBitemsテーブル、item_idで抽出したカラムを削除し、画像もフォルダから削除する
 if(destroy_item($db, $item_id) === true){
+   //$_SESSION['__messages'][]に商品を削除しました。というメッセージを格納する
   set_message('商品を削除しました。');
+  //何らかの処理が失敗した場合
 } else {
+  //$_SESSION['__errors'][]に商品削除に失敗しました。というメッセージを格納する
   set_error('商品削除に失敗しました。');
 }
 
 
-
+//このページが表示されないよう、admin.phpにリダイレクトする
 redirect_to(ADMIN_URL);

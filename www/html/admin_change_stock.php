@@ -40,7 +40,7 @@ if(update_item_stock($db, $item_id, $stock)){
   set_message('在庫数を変更しました。');
   //何らかの原因でアップデートに失敗した場合
 } else {
-   //$_SESSION['__messages'][]に在庫数の変更に失敗しました。というメッセージを格納する
+   //$_SESSION['__errors'][]に在庫数の変更に失敗しました。というメッセージを格納する
   set_error('在庫数の変更に失敗しました。');
 }
 

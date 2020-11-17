@@ -60,7 +60,9 @@ define('USER_TYPE_ADMIN', 1);
 //DBusersテーブル、typeカラム2
 define('USER_TYPE_NORMAL', 2);
 
+//商品名の長さが一文字以上
 define('ITEM_NAME_LENGTH_MIN', 1);
+//商品名の長さが100文字以下
 define('ITEM_NAME_LENGTH_MAX', 100);
 
 //DBitemsテーブル、statusカラム1
@@ -68,6 +70,7 @@ define('ITEM_STATUS_OPEN', 1);
 //DBitemsテーブル、statusカラム0
 define('ITEM_STATUS_CLOSE', 0);
 
+//商品ステータスを設定する定数、連想配列でキーがopenの場合1の値が入り、キーがcloseの場合0の値が入る
 define('PERMITTED_ITEM_STATUSES', array(
   'open' => 1,
   'close' => 0,

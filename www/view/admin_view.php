@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!--//定数、/var/www/html/../view/templates/head.phpというドキュメントルートを通り、head.phpデータを読み取る-->
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>商品管理</title>
+  <!--//定数、/assets/css/admin.cssというドキュメントルートを通り、admin.cssを読み込む-->
   <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'admin.css'); ?>">
 </head>
 <body>
+<!--//定数、/var/www/html/../view/templates/header_logined.phpというドキュメントルートを通り、header_logined.phpデータを読み取る-->
   <?php
   include VIEW_PATH . 'templates/header_logined.php';
   ?>
@@ -13,8 +16,10 @@
   <div class="container">
     <h1>商品管理</h1>
 
+<!--//定数、/var/www/html/../view/templates/messages.phpというドキュメントルートを通り、messages.phpデータを読み取る-->
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
+ <!--form内の情報をadmin_insert_item.phpへ飛ばす-->
     <form
       method="post"
       action="admin_insert_item.php"
@@ -47,7 +52,7 @@
       <input type="submit" value="商品追加" class="btn btn-primary">
     </form>
 
-
+<!--$itemsに一つ以上値が入っていた場合は表示される-->
     <?php if(count($items) > 0){ ?>
       <table class="table table-bordered text-center">
         <thead class="thead-light">
@@ -99,10 +104,12 @@
           <?php } ?>
         </tbody>
       </table>
+      <!--$itemsに何も値が入っていない場合-->
     <?php } else { ?>
       <p>商品はありません。</p>
     <?php } ?>
   </div>
+   <!--jQuery、$('.delete')で要素を特定、confirmでダイアログを開く-->
   <script>
     $('.delete').on('click', () => confirm('本当に削除しますか？'))
   </script>
