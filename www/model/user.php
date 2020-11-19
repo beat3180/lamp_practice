@@ -13,11 +13,12 @@ function get_user($db, $user_id){
     FROM
       users
     WHERE
-      user_id = {$user_id}
+      user_id = ?
     LIMIT 1
   ";
+  $params = array($user_id);
 //キーをカラム毎に、値をそれぞれのカラムに充てた配列で取得する。
-  return fetch_query($db, $sql);
+  return fetch_query($db, $sql,$params);
 }
 
 //DBusersテーブルにある情報を特定のnameで抽出し、取得する
@@ -31,12 +32,12 @@ function get_user_by_name($db, $name){
     FROM
       users
     WHERE
-      name = '{$name}'
+      name = ?
     LIMIT 1
   ";
-
+$params = array($name);
 //キーをカラム毎に、値をそれぞれのカラムに充てた配列で取得する。
-  return fetch_query($db, $sql);
+  return fetch_query($db, $sql,$params);
 }
 
 //入力された情報をDBuserテーブルと照合、user_idをセッションに登録しユーザー情報を返す関数
@@ -132,9 +133,9 @@ function insert_user($db, $name, $password){
   $sql = "
     INSERT INTO
       users(name, password)
-    VALUES ('{$name}', '{$password}');
+    VALUES (?,?);
   ";
-
+$params = array($name,$password);
   //実行した結果を返す
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,$params);
 }
