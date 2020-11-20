@@ -17,6 +17,9 @@ if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
+//CSRFトークンの生成、セッションに登録する
+$token = get_csrf_token();
+
 //DB接続
 $db = get_db_connect();
 
@@ -31,5 +34,8 @@ if(is_admin($user) === false){
 
 //DBitemsテーブルの全ての情報を取得し、変数で出力する
 $items = get_all_items($db);
+
+// クリックジャッキング対策
+  header('X-FRAME-OPTIONS: DENY');
 //定数、/var/www/html/../view/admin_view.phpというドキュメントルートを通り、admin_viewデータを読み取る
 include_once VIEW_PATH . '/admin_view.php';

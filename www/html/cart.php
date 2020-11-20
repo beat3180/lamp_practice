@@ -19,6 +19,9 @@ if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
+//CSRFトークンの生成、セッションに登録する
+$token = get_csrf_token();
+
 //DB接続
 $db = get_db_connect();
 //$_SESSION['user_id']を取得する
@@ -30,5 +33,7 @@ $carts = get_user_carts($db, $user['user_id']);
 //カート内の商品の合計を計算する関数
 $total_price = sum_carts($carts);
 
+// クリックジャッキング対策
+  header('X-FRAME-OPTIONS: DENY');
 //定数、/var/www/html/../view/cart_view.phpというドキュメントルートを通り、cart_viewデータを読み取る
 include_once VIEW_PATH . 'cart_view.php';
