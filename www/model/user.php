@@ -45,12 +45,14 @@ function login_as($db, $name, $password){
   //抽出したuser情報を変数として出力する
   $user = get_user_by_name($db, $name);
   //ユーザー情報が間違っていたか、パスワードが間違っていた場合
-  if($user === false || $user['password'] !== $password){
+  if($user === false || password_verify($password, $user['password']) === false){
     //falseを返す
     return false;
   }
   //user_idをセッションに設定する
   set_session('user_id', $user['user_id']);
+   //セッションidを再発行
+   session_regenerate_id(TRUE);
   //ユーザー情報を返す
   return $user;
 }
@@ -64,7 +66,7 @@ function get_login_user($db){
 }
 
 
-//ユーザー名とパスワードのエラー処理を行い、間違っていた場合falseを返す.。間違っていなかった場合DBuserテーブルにユーザー名とパスワードをインサート
+//ユーザー名とパスワードのエラー処理を行い、間違っていた場合falseを返す。間違っていなかった場合DBuserテーブルにユーザー名とパスワードをインサート
 function regist_user($db, $name, $password, $password_confirmation) {
   if( is_valid_user($name, $password, $password_confirmation) === false){
     return false;
@@ -135,7 +137,9 @@ function insert_user($db, $name, $password){
       users(name, password)
     VALUES (?,?);
   ";
-$params = array($name,$password);
+  //取得したパスワード情報をハッシュ化して変数で出力する
+  $hash = password_hash($password, PASSWORD_DEFAULT);
+  $params = array($name,$hash);
   //実行した結果を返す
   return execute_query($db, $sql,$params);
 }

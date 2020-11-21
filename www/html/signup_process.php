@@ -15,7 +15,7 @@ if(is_logined() === true){
   redirect_to(HOME_URL);
 }
 
-//login_view.phpからPOSTで飛んできた特定の$tokenの情報を変数で出力
+//signup_view.phpからPOSTで飛んできた特定の$tokenの情報を変数で出力
 $token = get_post('csrf');
 
 //CSRF対策のトークンのチェック
@@ -34,7 +34,7 @@ $db = get_db_connect();
 //try構文。ブロック内で例外が起きればcatchで捕まえ、異常処理を出力する
 try{
 
-  //ユーザー名とパスワードのエラー処理を行い、間違っていた場合falseを返す
+  //ユーザー名とパスワードのエラー処理を行い、問題なければDBusersテーブルにユーザー名とパスワードを登録する
   $result = regist_user($db, $name, $password, $password_confirmation);
   //signup.phpにリダイレクトする
   if( $result=== false){

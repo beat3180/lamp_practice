@@ -211,7 +211,9 @@ function execute_query($db, $sql, ...$params_array){
         }
 
         $statement->bindValue($param_id, $value, $param_type);
+
     }
+
     // SQLを実行、結果を返す
     return $statement->execute();
   }catch(PDOException $e){
