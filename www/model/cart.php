@@ -22,10 +22,11 @@ function get_user_carts($db, $user_id){
     ON
       carts.item_id = items.item_id
     WHERE
-      carts.user_id = {$user_id}
+      carts.user_id = ?
   ";
+  $params = array($user_id);
   //キーを連番に、値をカラム毎の配列で取得する。
-  return fetch_all_query($db, $sql);
+  return fetch_all_query($db, $sql,$params);
 }
 
 //カートに関する一つの商品の情報を抽出する関数
@@ -48,13 +49,13 @@ function get_user_cart($db, $user_id, $item_id){
     ON
       carts.item_id = items.item_id
     WHERE
-      carts.user_id = {$user_id}
+      carts.user_id = ?
     AND
-      items.item_id = {$item_id}
+      items.item_id = ?
   ";
 
   //キーをカラム毎に、値をそれぞれのカラムに充てた配列で取得する。
-  return fetch_query($db, $sql);
+  return fetch_query($db, $sql,$user_id,$item_id);
 
 }
 
@@ -80,10 +81,12 @@ function insert_cart($db, $user_id, $item_id, $amount = 1){
         user_id,
         amount
       )
-    VALUES({$item_id}, {$user_id}, {$amount})
+    VALUES(?,?,?)
   ";
+  //配列でまとめる
+  $params = array($item_id,$user_id,$amount);
 //実行した結果を返す
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,$params);
 }
 
 //DBcartテーブル、cart_idで特定のamountカラムを抽出してアップデートする
@@ -92,13 +95,15 @@ function update_cart_amount($db, $cart_id, $amount){
     UPDATE
       carts
     SET
-      amount = {$amount}
+      amount = ?
     WHERE
-      cart_id = {$cart_id}
+      cart_id = ?
     LIMIT 1
   ";
+  //配列でまとめる
+  $params = array($amount,$cart_id);
   //実行した結果を返す
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,$params);
 }
 
 //DBcartテーブル、cart_idで特定のカラムを抽出してデリートする
@@ -107,11 +112,12 @@ function delete_cart($db, $cart_id){
     DELETE FROM
       carts
     WHERE
-      cart_id = {$cart_id}
+      cart_id = ?
     LIMIT 1
   ";
+  $params = array($cart_id);
 //実行した結果を返す
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,$params);
 }
 
 //商品購入。エラー処理、DBitemsのstockカラムアップデート処理、DBcartsテーブルの削除処理を通す
@@ -144,10 +150,11 @@ function delete_user_carts($db, $user_id){
     DELETE FROM
       carts
     WHERE
-      user_id = {$user_id}
+      user_id = ?
   ";
+  $params = array($user_id);
 //実行した結果を返す
-  execute_query($db, $sql);
+  execute_query($db, $sql,$params);
 }
 
 

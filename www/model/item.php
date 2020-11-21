@@ -17,10 +17,11 @@ function get_item($db, $item_id){
     FROM
       items
     WHERE
-      item_id = {$item_id}
+      item_id = ?
   ";
+  $params = array($item_id);
 //キーをカラム毎に、値をそれぞれのカラムに充てた配列で取得する。
-  return fetch_query($db, $sql);
+  return fetch_query($db, $sql,$params);
 }
 
 //DBitemsテーブルにある情報をtrue・falseで分岐させつつ全て開示する
@@ -102,11 +103,11 @@ function insert_item($db, $name, $price, $stock, $filename, $status){
         image,
         status
       )
-    VALUES('{$name}', {$price}, {$stock}, '{$filename}', {$status_value});
+    VALUES(?,?,?,?,?);
   ";
-
+$params = array($name,$price,$stock,$filename,$status_value);
   //実行した結果を返す
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,$params);
 }
 
 //DBitemsテーブル、item_idで抽出した該当のstatusをアップデートし、情報を返す
@@ -115,14 +116,14 @@ function update_item_status($db, $item_id, $status){
     UPDATE
       items
     SET
-      status = {$status}
+      status = ?
     WHERE
-      item_id = {$item_id}
+      item_id = ?
     LIMIT 1
   ";
-
+$params = array($status,$item_id);
   //実行した結果を返す
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,$params);
 }
 
 //DBitemsテーブル、item_idで抽出した該当のstockをアップデートし、情報を返す
@@ -131,13 +132,14 @@ function update_item_stock($db, $item_id, $stock){
     UPDATE
       items
     SET
-      stock = {$stock}
+      stock = ?
     WHERE
-      item_id = {$item_id}
+      item_id = ?
     LIMIT 1
   ";
+  $params = array($stock,$item_id);
 //実行した結果を返す
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,$params);
 }
 
 //DBitemsテーブル、item_idで抽出した該当のカラムを抽出し、デリートする
@@ -169,12 +171,12 @@ function delete_item($db, $item_id){
     DELETE FROM
       items
     WHERE
-      item_id = {$item_id}
+      item_id = ?
     LIMIT 1
   ";
-
+$params = array($item_id);
   //実行した結果を返す
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,$params);
 }
 
 
