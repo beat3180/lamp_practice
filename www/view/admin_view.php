@@ -50,6 +50,8 @@
       </div>
 
       <input type="submit" value="商品追加" class="btn btn-primary">
+       <!--CSRF対策のセッションに登録されたトークンを送信する-->
+      <input type="hidden" name="csrf" value="<?php print($token); ?>">
     </form>
 
 <!--$itemsに一つ以上値が入っていた場合は表示される-->
@@ -79,6 +81,8 @@
                 </div>
                 <input type="submit" value="変更" class="btn btn-secondary">
                 <input type="hidden" name="item_id" value="<?php print($item['item_id']); ?>">
+                <!--CSRF対策のセッションに登録されたトークンを送信する-->
+                <input type="hidden" name="csrf" value="<?php print($token); ?>">
               </form>
             </td>
             <td>
@@ -92,11 +96,15 @@
                   <input type="hidden" name="changes_to" value="open">
                 <?php } ?>
                 <input type="hidden" name="item_id" value="<?php print($item['item_id']); ?>">
+                <!--CSRF対策のセッションに登録されたトークンを送信する-->
+                <input type="hidden" name="csrf" value="<?php print($token); ?>">
               </form>
 
               <form method="post" action="admin_delete_item.php">
                 <input type="submit" value="削除" class="btn btn-danger delete">
                 <input type="hidden" name="item_id" value="<?php print($item['item_id']); ?>">
+                <!--CSRF対策のセッションに登録されたトークンを送信する-->
+                <input type="hidden" name="csrf" value="<?php print($token); ?>">
               </form>
 
             </td>

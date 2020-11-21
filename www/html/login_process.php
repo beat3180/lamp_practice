@@ -11,8 +11,19 @@ session_start();
 
 //(isset($_SESSION['user_id'])を取得できた場合TRUEを返す
 if(is_logined() === true){
+  //セッションidを再発行
+   session_regenerate_id(TRUE);
   // header関数処理を実行し、index.phpページへリダイレクトする
   redirect_to(HOME_URL);
+}
+
+//login_view.phpからPOSTで飛んできた特定の$tokenの情報を変数で出力
+$token = get_post('csrf');
+
+//CSRF対策のトークンのチェック
+if(is_valid_csrf_token($token) === false){
+  // header関数処理を実行し、login.phpページへリダイレクトする
+  redirect_to(LOGIN_URL);
 }
 
 //login_view.phpから飛んできたname情報を変数で出力する
@@ -32,7 +43,7 @@ if( $user === false){
   redirect_to(LOGIN_URL);
 }
 
-//
+
 set_message('ログインしました。');
 //管理者typeに一致した場合、admin.phpへリダイレクトする
 if ($user['type'] === USER_TYPE_ADMIN){

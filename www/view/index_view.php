@@ -36,6 +36,8 @@
                   <form action="index_add_cart.php" method="post">
                     <input type="submit" value="カートに追加" class="btn btn-primary btn-block">
                     <input type="hidden" name="item_id" value="<?php print($item['item_id']); ?>">
+                    <!--CSRF対策のセッションに登録されたトークンを送信する-->
+                    <input type="hidden" name="csrf" value="<?php print($token); ?>">
                   </form>
                 <?php } else { ?>
                   <p class="text-danger">現在売り切れです。</p>

@@ -13,11 +13,11 @@ function get_user($db, $user_id){
     FROM
       users
     WHERE
-      user_id = {$user_id}
+      user_id = ?
     LIMIT 1
   ";
 //キーをカラム毎に、値をそれぞれのカラムに充てた配列で取得する。
-  return fetch_query($db, $sql);
+  return fetch_query($db, $sql,[$user_id]);
 }
 
 //DBusersテーブルにある情報を特定のnameで抽出し、取得する
@@ -31,12 +31,12 @@ function get_user_by_name($db, $name){
     FROM
       users
     WHERE
-      name = '{$name}'
+      name = ?
     LIMIT 1
   ";
 
 //キーをカラム毎に、値をそれぞれのカラムに充てた配列で取得する。
-  return fetch_query($db, $sql);
+  return fetch_query($db, $sql,[$name]);
 }
 
 //入力された情報をDBuserテーブルと照合、user_idをセッションに登録しユーザー情報を返す関数
@@ -44,12 +44,14 @@ function login_as($db, $name, $password){
   //抽出したuser情報を変数として出力する
   $user = get_user_by_name($db, $name);
   //ユーザー情報が間違っていたか、パスワードが間違っていた場合
-  if($user === false || $user['password'] !== $password){
+  if($user === false || password_verify($password, $user['password']) === false){
     //falseを返す
     return false;
   }
   //user_idをセッションに設定する
   set_session('user_id', $user['user_id']);
+  //セッションidを再発行
+   session_regenerate_id(TRUE);
   //ユーザー情報を返す
   return $user;
 }
@@ -132,9 +134,10 @@ function insert_user($db, $name, $password){
   $sql = "
     INSERT INTO
       users(name, password)
-    VALUES ('{$name}', '{$password}');
+    VALUES (?,?);
   ";
-
+   //取得したパスワード情報をハッシュ化して変数で出力する
+  $hash = password_hash($password, PASSWORD_DEFAULT);
   //実行した結果を返す
-  return execute_query($db, $sql);
+  return execute_query($db, $sql,[$name,$hash]);
 }

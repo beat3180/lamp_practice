@@ -198,3 +198,21 @@ function is_valid_upload_image($image){
   //問題ない場合trueを返す
   return true;
 }
+
+
+//CSRFトークンの生成、セッションに登録する
+function get_csrf_token(){
+  //CSRF対策の安全安心なトークンを作成
+  $token = get_random_string(30);
+  set_session('csrf_token', $token);
+  return $token;
+}
+
+//CSRF対策のトークンのチェック
+function is_valid_csrf_token($token){
+  if($token === '') {
+    return false;
+  }
+  //セッションの内容を確認し、$tokenと一致しているかチェックする
+  return $token === get_session('csrf_token');
+}
