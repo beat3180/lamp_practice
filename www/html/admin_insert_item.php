@@ -20,9 +20,6 @@ if(is_logined() === false){
 //DB接続
 $db = get_db_connect();
 
-//htmlエスケープ関数を変数で出力
-$html = h($s);
-
 //$_SESSION['user_id']を取得する
 $user = get_login_user($db);
 
