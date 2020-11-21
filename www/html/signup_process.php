@@ -15,6 +15,12 @@ if(is_logined() === true){
   redirect_to(HOME_URL);
 }
 
+//login_view.phpからPOSTで飛んできた特定の$tokenの情報を変数で出力
+$token = get_post('csrf');
+
+//CSRF対策のトークンのチェック
+is_valid_csrf_token($token);
+
 //signup_view.phpから飛んできたname情報を変数で出力する
 $name = get_post('name');
 //signup_view.phpから飛んできたpassword情報を変数で出力する

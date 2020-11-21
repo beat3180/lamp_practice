@@ -13,5 +13,11 @@ if(is_logined() === true){
   redirect_to(HOME_URL);
 }
 
+//CSRFトークンの生成、セッションに登録する
+$token = get_csrf_token();
+
+// クリックジャッキング対策
+  header('X-FRAME-OPTIONS: DENY');
+
 //定数、/var/www/html/../view/login_view.phpというドキュメントルートを通り、login_viewデータを読み取る
 include_once VIEW_PATH . 'login_view.php';

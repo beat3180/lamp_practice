@@ -17,6 +17,12 @@ if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
+//admin_view.phpからPOSTで飛んできた特定の$tokenの情報を変数で出力
+$token = get_post('csrf');
+
+//CSRF対策のトークンのチェック
+is_valid_csrf_token($token);
+
 //DB接続
 $db = get_db_connect();
 

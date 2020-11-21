@@ -19,6 +19,7 @@ if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
+
 //DB接続
 $db = get_db_connect();
 //$_SESSION['user_id']を取得する
