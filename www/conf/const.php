@@ -1,6 +1,8 @@
 <?php
 
-//定数、/var/www/html/というドキュメントルートを取得し、../model/というドキュメントルートに繋げる。../は何故あるのか？
+//クリックジャッキング対策
+header('X-FRAME-OPTIONS: DENY');
+//定数、/var/www/html/というドキュメントルートを取得し、../model/というドキュメントルートに繋げる。
 define('MODEL_PATH', $_SERVER['DOCUMENT_ROOT'] . '/../model/');
 //定数、/var/www/html/というドキュメントルートを取得し、../view/というドキュメントルートに繋げる
 define('VIEW_PATH', $_SERVER['DOCUMENT_ROOT'] . '/../view/');
@@ -10,7 +12,7 @@ define('VIEW_PATH', $_SERVER['DOCUMENT_ROOT'] . '/../view/');
 define('IMAGE_PATH', '/assets/images/');
 //定数、/assets/css/というドキュメントルートを取得する
 define('STYLESHEET_PATH', '/assets/css/');
-//定数、/var/www/html/というドキュメントルートを取得し、/assets/images/というドキュメントルートに繋げる。../は何故ないのか？
+//定数、/var/www/html/というドキュメントルートを取得し、/assets/images/というドキュメントルートに繋げる。
 define('IMAGE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/assets/images/' );
 
 //Mysqlのホスト名
