@@ -68,7 +68,7 @@ function add_cart($db, $user_id, $item_id ) {
     return insert_cart($db, $user_id, $item_id);
   }
   //カート内に情報がすでにあった場合、amountに数を1+した上でアップデートする
-  return update_cart_amount($db, $cart['cart_id'], $cart['amount'] + 1);
+  return update_cart_amount($db,$cart['amount'] + 1,$cart['cart_id']);
 }
 
 //DBcartsテーブル、カート内に商品を登録する関数
@@ -87,7 +87,7 @@ function insert_cart($db, $user_id, $item_id, $amount = 1){
 }
 
 //DBcartテーブル、cart_idで特定のamountカラムを抽出してアップデートする
-function update_cart_amount($db, $cart_id, $amount){
+function update_cart_amount($db, $amount, $cart_id){
   $sql = "
     UPDATE
       carts
@@ -98,7 +98,7 @@ function update_cart_amount($db, $cart_id, $amount){
     LIMIT 1
   ";
   //実行した結果を返す
-  return execute_query($db, $sql,[$cart_id,$amount]);
+  return execute_query($db, $sql,[$amount,$cart_id]);
 }
 
 //DBcartテーブル、cart_idで特定のカラムを抽出してデリートする
@@ -115,7 +115,7 @@ function delete_cart($db, $cart_id){
 }
 
 //商品購入。エラー処理、DBitemsのstockカラムアップデート処理、DBcartsテーブルの削除処理を通す
-function purchase_carts($db, $carts){
+/*function purchase_carts($db, $carts){
   //エラー処理、falseがあった場合
   if(validate_cart_purchase($carts) === false){
     //falseを返す
@@ -136,7 +136,51 @@ function purchase_carts($db, $carts){
 
   //DBcartsテーブル、特定のuser_idで抽出したカラムを削除
   delete_user_carts($db, $carts[0]['user_id']);
-}
+}*/
+
+
+
+//商品購入。エラー処理、DBitemsのstockカラムアップデート処理、DBcartsテーブルの削除処理を通す
+function purchase_carts($db, $carts){
+  //エラー処理、falseがあった場合
+  if(validate_cart_purchase($carts) === false){
+    //falseを返す
+    return false;
+  }
+
+  //トランザクションを開始
+  $db->beginTransaction();
+
+  try{
+    //carts変数内をforeachで回す
+    foreach($carts as $cart){
+      //DBitemsテーブル、stockカラムを$cart['amount']の数だけ減らした数へアップデート
+      update_item_stock($db,$cart['item_id'],$cart['stock'] - $cart['amount']);
+    }
+    //購入履歴の関数。foreach内を避けて一度だけインサートする。
+    insert_history($db, $carts[0]['user_id']);
+    //購入履歴の注文番号を取得する。
+    $order_id = $db->lastInsertId('order_id');
+    //注文番号とそれぞれの商品名、値段、購入数など購入明細に必要な情報を取得する
+    $order_ids = get_order_id($db, $order_id);
+    //order_ids変数内をforeachで回す
+    foreach ($order_ids as $value){
+      //購入明細にインサートする
+      insert_purchase_detail($db,$value['order_id'],$value['item_id'],$value['price'],$value['amount']);
+    }
+    //結果をコミットする
+    $db->commit();
+    //DBcartsテーブル、特定のuser_idで抽出したカラムを削除
+    delete_user_carts($db, $carts[0]['user_id']);
+  } catch (PDOException $e) {
+      // ロールバック処理
+      $db->rollback();
+      //失敗した場合のエラー処理
+      set_error($cart['name'] . 'の購入に失敗しました。');
+      throw $e;
+  }
+  }
+
 
 //DBcartsテーブル、特定のuser_idで抽出したカラムを削除
 function delete_user_carts($db, $user_id){

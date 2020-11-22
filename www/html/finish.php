@@ -9,6 +9,10 @@ require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 ///var/www/html/../model/cart.phpというドキュメントルートを通りcartデータに関する関数ファイルを読み込み
 require_once MODEL_PATH . 'cart.php';
+///var/www/html/../model/history.phpというドキュメントルートを通りhistoryデータに関する関数ファイルを読み込み
+require_once MODEL_PATH . 'history.php';
+///var/www/html/../model/purchase_detail.phpというドキュメントルートを通りpurchase_detailデータに関する関数ファイルを読み込み
+require_once MODEL_PATH . 'purchase_detail.php';
 
 //セッションの開始、作成
 session_start();
