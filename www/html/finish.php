@@ -19,6 +19,15 @@ if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
+//cart_view.phpからPOSTで飛んできた特定の$tokenの情報を変数で出力
+$token = get_post('csrf');
+
+//CSRF対策のトークンのチェック
+if(is_valid_csrf_token($token) === false){
+  // header関数処理を実行し、login.phpページへリダイレクトする
+  redirect_to(LOGIN_URL);
+}
+
 //DB接続
 $db = get_db_connect();
 //$_SESSION['user_id']を取得する

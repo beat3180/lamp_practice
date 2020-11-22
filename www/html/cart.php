@@ -13,6 +13,9 @@ require_once MODEL_PATH . 'cart.php';
 //セッションの開始、作成
 session_start();
 
+//CSRFトークンの生成、セッションに登録する
+$token = get_csrf_token();
+
 //(isset($_SESSION['user_id'])を取得しようとして、取得できなかった場合TRUEを返す
 if(is_logined() === false){
   // header関数処理を実行し、login.phpページへリダイレクトする

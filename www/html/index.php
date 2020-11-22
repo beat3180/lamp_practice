@@ -17,6 +17,9 @@ if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
+//CSRFトークンの生成、セッションに登録する
+$token = get_csrf_token();
+
 //DB接続
 $db = get_db_connect();
 //$_SESSION['user_id']を取得する
