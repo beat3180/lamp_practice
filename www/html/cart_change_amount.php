@@ -31,7 +31,7 @@ if(is_valid_csrf_token($token) === false){
 //DB接続
 $db = get_db_connect();
 
-//$_SESSION['user_id']を取得する
+//$_SESSION['user_id']を利用してDBuserテーブルの情報を取得し、変数で出力する
 $user = get_login_user($db);
 
 //cart_view.phpからPOSTで飛んできた特定のcart_idの情報を変数で出力する
@@ -39,8 +39,9 @@ $cart_id = get_post('cart_id');
 //cart_view.phpからPOSTで飛んできた特定のamountの情報を変数で出力する
 $amount = get_post('amount');
 
+
 //DBcartsテーブルのamountを出力された変数でアップデートする
-if(update_cart_amount($db, $cart_id, $amount)){
+if(update_cart_amount($db, $amount, $cart_id)){
   set_message('購入数を更新しました。');
 } else {
   set_error('購入数の更新に失敗しました。');
