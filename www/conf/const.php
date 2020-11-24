@@ -38,6 +38,8 @@ define('HOME_URL', '/index.php');
 define('CART_URL', '/cart.php');
 //finish.phpのドキュメントルート
 define('FINISH_URL', '/finish.php');
+//history.phpのドキュメントルート
+define('HISTORY_URL', '/history.php');
 //admin.phpのドキュメントルート
 define('ADMIN_URL', '/admin.php');
 

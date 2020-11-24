@@ -15,6 +15,10 @@
           <!--logout.phpのドキュメントルート-->
           <a class="nav-link" href="<?php print(LOGOUT_URL);?>">ログアウト</a>
         </li>
+        <li class="nav-item">
+          <!--history.phpのドキュメントルート-->
+          <a class="nav-link" href="<?php print(HISTORY_URL);?>">購入履歴</a>
+        </li>
          <!--adminユーザーの場合、下を表示-->
         <?php if(is_admin($user)){ ?>
           <li class="nav-item">
