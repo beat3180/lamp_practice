@@ -63,3 +63,20 @@ function execute_query($db, $sql, $params = array()){
   }
   return false;
 }
+
+//ページネーション用、全てのデータ件数を取得する
+function fetch_Column_query($db, $sql, $params = array()){
+   try{
+    // SQL文を実行する準備
+    $statement = $db->prepare($sql);
+    // SQLを実行
+    $statement->execute($params);
+    //結果を返す
+    return $statement->fetchColumn();
+  }catch(PDOException $e){
+    set_error('データ取得に失敗しました。');
+  }
+  return false;
+
+
+}
