@@ -216,3 +216,36 @@ function is_valid_csrf_token($token){
   //セッションの内容を確認し、$tokenと一致しているかチェックする
   return $token === get_session('csrf_token');
 }
+
+
+// ページネーションの数を取得、余った分は切り上げする
+function get_pagination($page_num,$max_page = 8){
+  return ceil($page_num / $max_page);
+}
+
+
+//GETで現在のページ数を取得する(未入力の場合は1を挿入)
+function get_page($get){
+  //$_GET[page]が入っているか確認する
+  if (isset($_GET['page'])) {
+  //$_GETがあればそのまま返す
+	return $_GET['page'];
+} else {
+  //$_GETがなければ1の値を返す
+  return 1;
+}
+
+}
+
+// スタートのポジションを計算する
+function get_page_start($page,$max_page = 8){
+  //$_GET[page]が1より大きい場合
+  if ($page > 1) {
+	  // 例：２ページ目の場合は、『(2 × 8) - 8 = 8』
+	  return ($page * $max_page) - $max_page;
+  } else {
+    //$_GET[page]が1未満の場合、0を返す
+	  return 0;
+  }
+
+}

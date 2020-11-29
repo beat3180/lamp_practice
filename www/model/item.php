@@ -23,8 +23,8 @@ function get_item($db, $item_id){
   return fetch_query($db, $sql,[$item_id]);
 }
 
-//DBitemsテーブルにある情報をtrue・falseで分岐させつつ全て開示する
-function get_items($db, $is_open = false){
+//DBitemsテーブルにある情報を全て開示する
+function get_admin_items($db){
   $sql = '
     SELECT
       item_id,
@@ -36,15 +36,31 @@ function get_items($db, $is_open = false){
     FROM
       items
   ';
-  //trueの引数が入っていた場合、ステータス1のみ開示する
-  if($is_open === true){
-    $sql .= '
-      WHERE status = 1
+  //キーを連番に、値をカラム毎の配列で取得する。
+  return fetch_all_query($db, $sql);
+}
+
+//DBitemsテーブルにある情報をstatus=1のみに絞り、8件開示する。デフォルト値は8にする
+function get_index_items($db,$start,$max_view = 8){
+
+  $sql = '
+    SELECT
+      item_id,
+      name,
+      stock,
+      price,
+      image,
+      status
+    FROM
+      items
+      WHERE
+        status = 1
+      LIMIT
+        ?,?
     ';
-  }
 
 //キーを連番に、値をカラム毎の配列で取得する。
-  return fetch_all_query($db, $sql);
+  return fetch_all_query($db, $sql,[$start,$max_view]);
 }
 
 //DBitemsテーブルのステータスに関わらず全ての情報を開示する
@@ -54,7 +70,7 @@ function get_all_items($db){
 
 //DBitemsテーブルのステータス1=openのみの情報を開示する
 function get_open_items($db){
-  return get_items($db, true);
+  return get_items($db,true,$start);
 }
 
 //画像ファイルの処理やエラー処理を通し、最終的に商品を登録する
@@ -259,4 +275,17 @@ function is_valid_item_status($status){
   }
   //trueかfalse、if文で分岐させたいずれかの値を返す
   return $is_valid;
+}
+
+//itemsテーブルのデータ件数を取得する
+function get_items_total_count($db){
+  $sql = "
+   SELECT
+    COUNT(*) item_id
+   FROM
+    items
+  ";
+  //実行した結果を返す
+  return fetch_Column_query($db, $sql);
+
 }

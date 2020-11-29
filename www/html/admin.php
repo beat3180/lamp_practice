@@ -33,6 +33,6 @@ if(is_admin($user) === false){
 }
 
 //DBitemsテーブルの全ての情報を取得し、変数で出力する
-$items = get_all_items($db);
+$items = get_admin_items($db);
 //定数、/var/www/html/../view/admin_view.phpというドキュメントルートを通り、admin_viewデータを読み取る
 include_once VIEW_PATH . '/admin_view.php';
