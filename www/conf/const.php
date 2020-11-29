@@ -14,15 +14,26 @@ define('IMAGE_PATH', '/assets/images/');
 define('STYLESHEET_PATH', '/assets/css/');
 //定数、/var/www/html/というドキュメントルートを取得し、/assets/images/というドキュメントルートに繋げる。
 define('IMAGE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/assets/images/' );
+if ($_SERVER['SERVER_ADDR']==='160.251.11.253'){
+  //Mysqlのホスト名
+  define('DB_HOST', 'localhost');
+  //Mysqlのデータベース名
+  define('DB_NAME', 'ec_site');
+  //Mysqlのユーザー名
+  define('DB_USER', 'root');
+  //Mysqlのパスワード
+  define('DB_PASS', 'nek16rUEi');
+}else {
+  //Mysqlのホスト名
+  define('DB_HOST', 'mysql');
+  //Mysqlのデータベース名
+  define('DB_NAME', 'sample');
+  //Mysqlのユーザー名
+  define('DB_USER', 'testuser');
+  //Mysqlのパスワード
+  define('DB_PASS', 'password');
+}
 
-//Mysqlのホスト名
-define('DB_HOST', 'mysql');
-//Mysqlのデータベース名
-define('DB_NAME', 'sample');
-//Mysqlのユーザー名
-define('DB_USER', 'testuser');
-//Mysqlのパスワード
-define('DB_PASS', 'password');
 //Mysqlの文字セット
 define('DB_CHARSET', 'utf8');
 
