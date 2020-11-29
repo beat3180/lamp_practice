@@ -29,7 +29,7 @@ if(is_valid_csrf_token($token) === false){
 //DB接続
 $db = get_db_connect();
 
-//$_SESSION['user_id']を取得する
+//$_SESSION['user_id']でDBusersテーブルから該当するuser_idを抽出し、情報を返す
 $user = get_login_user($db);
 
 //DBusersテーブル、typeカラムと一致しなかった場合

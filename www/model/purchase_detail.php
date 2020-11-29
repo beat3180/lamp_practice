@@ -46,5 +46,28 @@ function get_order_id($db, $order_id){
   return fetch_all_query($db, $sql,[$order_id]);
 }
 
+function get_user_purchase_details($db, $order_id){
+$sql = "
+   SELECT
+      purchase_details.order_id,
+      purchase_details.item_id,
+      purchase_details.price,
+      purchase_details.amount,
+      (purchase_details.price* purchase_details.amount) as sub_total_price,
+      items.name
+    FROM
+     purchase_details
+    JOIN
+      items
+    ON
+      purchase_details.item_id = items.item_id
+     WHERE
+      purchase_details.order_id = ?
+  ";
+  //キーを連番に、値をカラム毎の配列で取得する。
+  return fetch_all_query($db, $sql,[$order_id]);
+}
+
+
 
 ?>

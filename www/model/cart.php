@@ -194,19 +194,19 @@ function delete_user_carts($db, $user_id){
   execute_query($db, $sql,[$user_id]);
 }
 
-
-//カート内の商品の合計を計算する関数
+//カート商品の合計を計算する関数
 function sum_carts($carts){
   //合計の変数を作る
   $total_price = 0;
-  //カート内にある商品の配列をforeachで回す
+  //商品の配列をforeachで回す
   foreach($carts as $cart){
-    //合計の変数にカート商品の値段と数をかけたものを入れる
+    //合計の変数に商品の値段と数をかけたものを入れる
     $total_price += $cart['price'] * $cart['amount'];
   }
   //値段の合計を返す
   return $total_price;
 }
+
 
 //carts変数内のエラー処理
 function validate_cart_purchase($carts){
