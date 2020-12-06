@@ -37,11 +37,11 @@ div{
 
 <h3>サイトマップ</h3>
 
-<div><a href="/assets/images/マンガトーカー/sitemap(3).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/sitemap(3).png" width="650" height="500" alt="サイトマップ1" title="サイトマップ1"></a></div>
+<div><a href="/assets/images/マンガトーカー/Sitemap(3).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/Sitemap(3).png" width="650" height="500" alt="サイトマップ1" title="サイトマップ1"></a></div>
 
-<div><a href="/assets/images/マンガトーカー/sitemap(1).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/sitemap(1).png" width="650" height="500" alt="サイトマップ2" title="サイトマップ2"></a></div>
+<div><a href="/assets/images/マンガトーカー/Sitemap(1).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/Sitemap(1).png" width="650" height="500" alt="サイトマップ2" title="サイトマップ2"></a></div>
 
-<div><a href="/assets/images/マンガトーカー/sitemap(2).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/sitemap(2).png" width="650" height="500" alt="サイトマップ3" title="サイトマップ3"></a></div>
+<div><a href="/assets/images/マンガトーカー/Sitemap(2).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/Sitemap(2).png" width="650" height="500" alt="サイトマップ3" title="サイトマップ3"></a></div>
 
 <h3>ER図</h3>
 
