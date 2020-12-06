@@ -39,7 +39,7 @@ div{
 
 <div><a href="/assets/images/マンガトーカー/サイトマップ(3).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/サイトマップ(3).png" width="650" height="500" alt="サイトマップ1" title="サイトマップ1"></a></div>
 
-<div><a href="/assets/images/マンガトーカーサイトマップ(1).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/サイトマップ(1).png" width="650" height="500" alt="サイトマップ2" title="サイトマップ2"></a></div>
+<div><a href="/assets/images/マンガトーカー/サイトマップ(1).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/サイトマップ(1).png" width="650" height="500" alt="サイトマップ2" title="サイトマップ2"></a></div>
 
 <div><a href="/assets/images/マンガトーカー/サイトマップ(2).png" data-lightbox="group"><img src="/assets/images/マンガトーカー/サイトマップ(2).png" width="650" height="500" alt="サイトマップ3" title="サイトマップ3"></a></div>
 
