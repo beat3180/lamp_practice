@@ -7,6 +7,12 @@
   <!--//定数、/assets/css/signup.cssというドキュメントルートを通り、signup.cssを読み込む-->
   <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'signup.css'); ?>">
 </head>
+<style>
+.portfolios{
+  text-align: center;
+  margin-top: 80px;
+}
+</style>
 <body>
   <!--//定数、/var/www/html/../view/templates/header.phpというドキュメントルートを通り、header.phpデータを読み取る-->
   <?php include VIEW_PATH . 'templates/header.php'; ?>
@@ -35,5 +41,6 @@
       <input type="hidden" name="csrf" value="<?php print($token); ?>">
     </form>
   </div>
+  <div class="portfolios"><a href="portfolios.php"><img src="/assets/images/ポートフォリオサイト.png" width="350" height="200"></a></div>
 </body>
 </html>

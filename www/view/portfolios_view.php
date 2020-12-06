@@ -41,14 +41,14 @@ h1{font-size:3em;}
 <body>
   <nav  class="transparent" role="navigation">
     <div class="nav-wrapper container">
-      <h3 id="logo-container" class="brand-logo red-text text-darken-4">プログラミング奮闘記</h3>
+      <h3 id="logo-container" class="brand-logo red-text text-darken-4">beatのポートフォリオまとめ</h3>
     </div>
   </nav>
 
   <div class="section no-pad-bot" id="index-banner" >
     <div class="container">
 <br><br>
-      <h1 class="header center black-text">beatのポートフォリオまとめ</h1>
+      <h1 class="header center black-text">プログラミング奮闘記</h1>
       <div class="row center">
         <h5 class="header col s12  black-text light">
           今まで練習のために作ってきたポートフォリオは
@@ -120,12 +120,17 @@ h1{font-size:3em;}
           <div class="icon-block">
             <h2 class="center">
               <i class="material-icons">
-                <a href="#">create</a>
+                <a href="talker.php">create</a>
               </i>
             </h2>
-            <h5 class="center">追加予定</h5>
+            <h5 class="center">記事投稿サイト(マンガトーカー)</h5>
             <p class="light">
-            追加予定
+              　自分で１から考えて作ったポートフォリオ。何か人の役に立つものをと考え、とりあえず自分の需要が満たせるものを作るに至った。
+              <br />
+              　具体的には漫画というジャンルに特化した記事投稿サイト。記事の投稿、閲覧だけでなくコメントもできて同じ趣味の人間とコミュニケーションが取れる。
+              <br />
+              　といっても今現在は残念ながら構想段階、とりあえず作った企画書やサイトマップなどをここには載せておきます。laravelの勉強と平行して製作中！
+
             </p>
           </div>
         </div>
@@ -153,6 +158,8 @@ h1{font-size:3em;}
           <p class="grey-text text-lighten-4">
             <br />
             ・ECサイト
+            <br />
+            ・記事投稿サイト(マンガトーカー)
             <br />
           </p>
         </div>
